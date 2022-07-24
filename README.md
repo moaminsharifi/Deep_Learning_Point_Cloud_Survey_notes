@@ -48,7 +48,6 @@ in this repo I write some notes when I read article.
       - [Hierarchical Data Structure-based Methods](#hierarchical-data-structure-based-methods)
       - [Other Methods](#other-methods)
 
-
 --
 ## 1- Introduction:
 ### Point Cloud usage:
