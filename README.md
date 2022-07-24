@@ -88,5 +88,19 @@ Methods for this task usually learn the embedding of each point first and then e
 
 ### Multi-View Based Methods
 
+These methods first project a 3D shape into multiple views and extract view-wise features, and then fuse these features for accurate shape classification. 
+
+#### `MVCNN [40]`:
+MVCNN [40] is a pioneering work, which simply maxpools multi-view features into a global descriptor. However, max-pooling only retains the maximum elements from a specific view, resulting in information loss
+
+#### `MHBN [41]`:
+integrates local convolutional features by harmonized bilinear pooling to produce a compact global descriptor.
+#### `Yang et al. [42]`:
+first leveraged a relation network to exploit the inter-relationships (e.g., region-region relationship and view-view relationship) over a group of views, and then aggregated these views to obtain a discriminative 3D object representation.
+
+#### `Wei et al. [47]`:
+used a directed graph in View-GCN by considering multiple views as graph nodes. The core layer composing of local graph convolution, non-local message passing and selective view-sampling is then applied to the constructed graph. The concatenation of max-pooled node features at all levels is
+finally used to form the global shape descriptor.
+
 ### Volumetric-based Methods
 ### **Point-based Methods**
