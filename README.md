@@ -20,12 +20,19 @@ in this repo I write some notes when I read article.
   - [3D Shape Classification](#3d-shape-classification)
       - [3D Shape Classification methods](#3d-shape-classification-methods)
     - [Multi-View Based Methods](#multi-view-based-methods)
-      - [`MVCNN [40]`:](#mvcnn-40)
-      - [`MHBN [41]`:](#mhbn-41)
-      - [`Yang et al. [42]`:](#yang-et-al-42)
-      - [`Wei et al. [47]`:](#wei-et-al-47)
+      - [MVCNN \[40\]:](#mvcnn-40)
+      - [MHBN \[41\]:](#mhbn-41)
+      - [Yang et al. \[42\]:](#yang-et-al-42)
+      - [Wei et al. \[47\]:](#wei-et-al-47)
     - [Volumetric-based Methods](#volumetric-based-methods)
+      - [Maturana et al. \[48\] (VoxNet):](#maturana-et-al-48-voxnet)
+      - [Wu et al. \[6\]:](#wu-et-al-6)
+      - [OctNet \[49\]:](#octnet-49)
+      - [Wang et al. \[50\]:](#wang-et-al-50)
+      - [Le et al. \[51\]:](#le-et-al-51)
+      - [Ben-Shabat et al. \[52\]](#ben-shabat-et-al-52)
     - [**Point-based Methods**](#point-based-methods)
+
 
 --
 ## 1- Introduction:
@@ -114,17 +121,37 @@ Methods for this task usually learn the embedding of each point first and then e
 
 These methods first project a 3D shape into multiple views and extract view-wise features, and then fuse these features for accurate shape classification. 
 
-#### `MVCNN [40]`:
+#### MVCNN [40]:
 MVCNN [40] is a pioneering work, which simply maxpools multi-view features into a global descriptor. However, max-pooling only retains the maximum elements from a specific view, resulting in information loss
 
-#### `MHBN [41]`:
+#### MHBN [41]:
 integrates local convolutional features by harmonized bilinear pooling to produce a compact global descriptor.
-#### `Yang et al. [42]`:
+#### Yang et al. [42]:
 first leveraged a relation network to exploit the inter-relationships (e.g., region-region relationship and view-view relationship) over a group of views, and then aggregated these views to obtain a discriminative 3D object representation.
 
-#### `Wei et al. [47]`:
+#### Wei et al. [47]:
 used a directed graph in View-GCN by considering multiple views as graph nodes. The core layer composing of local graph convolution, non-local message passing and selective view-sampling is then applied to the constructed graph. The concatenation of max-pooled node features at all levels is
 finally used to form the global shape descriptor.
 
 ### Volumetric-based Methods
+These methods usually ‍‍`voxelize‍` a point cloud into 3D grids, and then apply a 3D Convolution Neural Network (CNN) on the volumetric representation for shape classification.
+
+#### Maturana et al. [48] (VoxNet):
+introduced a volumetric occupancy network called VoxNet to achieve robust 3D object recognition
+#### Wu et al. [6]:
+proposed a convolutional deep belief based 3D ShapeNets to learn the distribution of points from various 3D shapes 
+####  OctNet [49]:
+using a hybrid grid-octree structure, which represents the scene with several shallow octrees along a regular grid. The structure of octree is encoded efficiently using a bit string representation, and the feature vector of each voxel is indexed by simple arithmetic
+
+#### Wang et al. [50]:
+Octree-based CNN for 3D shape classification. The average normal vectors of a 3D model sampled in the finest leaf octants are fed into the network, and 3D-CNN is applied on the octants occupied by the 3D shape surface. 
+
+**OctNet requires much less memory and runtime for high-resolution point clouds**
+
+#### Le et al. [51]:
+proposed a hybrid network called PointGrid, which integrates the point and grid representation for efficient point cloud processing. A constant number of points is sampled within each embedding volumetric grid cell, which allows the network to extract geometric details by using 3D convolutions.
+
+#### Ben-Shabat et al. [52]
+transformed the input point cloud into 3D grids which are further represented by 3D modified Fisher Vector (3DmFV) method, and then learned the global representation through a conventional CNN architecture.
+
 ### **Point-based Methods**
