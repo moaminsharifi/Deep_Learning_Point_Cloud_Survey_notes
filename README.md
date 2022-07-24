@@ -32,6 +32,21 @@ in this repo I write some notes when I read article.
       - [Le et al. \[51\]:](#le-et-al-51)
       - [Ben-Shabat et al. \[52\]](#ben-shabat-et-al-52)
     - [**Point-based Methods**](#point-based-methods)
+      - [Pointwise MLP Methods](#pointwise-mlp-methods)
+        - [PointNet \[5\]:](#pointnet-5)
+        - [Deep sets \[53\]:](#deep-sets-53)
+        - [Qi et al. \[54\] (PointNet++):](#qi-et-al-54-pointnet)
+        - [Mo-Net \[55\]:](#mo-net-55)
+        - [Point Attention Transformers (PATs) \[56\]](#point-attention-transformers-pats-56)
+        - [PointWeb \[57\]](#pointweb-57)
+        - [Duan et al. \[58\] (Structural Relational Network (SRN))](#duan-et-al-58-structural-relational-network-srn)
+        - [Lin et al. \[59\]:](#lin-et-al-59)
+        - [SRINet \[60\]:](#srinet-60)
+        - [Yan et al \[61\] (PointASNL)](#yan-et-al-61-pointasnl)
+      - [Convolution-based Methods](#convolution-based-methods)
+      - [Graph-based Methods](#graph-based-methods)
+      - [Hierarchical Data Structure-based Methods](#hierarchical-data-structure-based-methods)
+      - [Other Methods](#other-methods)
 
 
 --
@@ -155,3 +170,46 @@ proposed a hybrid network called PointGrid, which integrates the point and grid 
 transformed the input point cloud into 3D grids which are further represented by 3D modified Fisher Vector (3DmFV) method, and then learned the global representation through a conventional CNN architecture.
 
 ### **Point-based Methods**
+#### Pointwise MLP Methods 
+![A lightweight architecture of PointNet. n denotes the number of input points, M denotes the dimension of the learned features for each point.](assets/fig_4.png)
+
+These methods model each point independently with several shared Multi-Layer Perceptrons (MLPs) and then aggregate a global feature using a symmetric aggregation function.
+- * Typical deep learning methods for 2D images cannot be directly applied to 3D point clouds due to their inherent data irregularities.
+
+##### PointNet [5]:
+Directly takes point clouds as its input and achieves permutation invariance with a symmetric function. PointNet learns pointwise features independently with several MLP layers and extracts global features with a max-pooling layer
+#####  Deep sets [53]:
+achieves permutation invariance by summing up all representations and applying nonlinear transformations. Since features are learned independently for each point in PointNet
+##### Qi et al. [54] (PointNet++):
+proposed a hierarchical network PointNet++ to capture fine geometric structures from the neighborhood of each point
+
+**Layers**:
+- the sampling layer
+- the grouping layer
+- the PointNet based learning layer.
+  
+PointNet++ learns features from a local geometric structure and abstracts the local features layer by layer.
+##### Mo-Net [55]:
+is similar to PointNet [5] but it takes a finite set of moments as its input
+##### Point Attention Transformers (PATs) [56]
+represents each point by its own absolute position and relative positions with respect to its neighbors and learns high dimensional features through MLPs. Then, Group Shuffle Attention (GSA) is used to capture relations between points, and a permutation invariant, differentiable and trainable end-to-end Gumbel Subset Sampling (GSS) layer is developed to learn hierarchical features
+##### PointWeb [57]
+based on PointNet++, utilizes the context of the local neighborhood to improve point features using Adaptive Feature Adjustment (AFA)
+##### Duan et al. [58] (Structural Relational Network (SRN))
+proposed a Structural Relational Network (SRN) to learn structural relational features between different local structures using MLP.
+
+##### Lin et al. [59]:
+
+accelerated the inference process by constructing a lookup table for both input and function spaces learned by PointNet. The inference time on the ModelNet and ShapeNet datasets is sped up by 1.5 ms and 32 times over PointNet on a moderate machine
+
+##### SRINet [60]:
+first projects a point cloud to obtain rotation invariant representations, and then utilizes PointNet-based backbone to extract a global feature and graph-based aggregation to extract local features
+
+#####  Yan et al [61] (PointASNL)
+utilized an Adaptive Sampling (AS) module to adaptively adjust the coordinates and features of points sampled by the Furthest Point Sampling (FPS) algorithm, and proposed a local-nonlocal (L-NL) module to capture the local and long range dependencies of these sampled points.
+
+
+#### Convolution-based Methods
+#### Graph-based Methods
+#### Hierarchical Data Structure-based Methods
+#### Other Methods
