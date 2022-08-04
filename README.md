@@ -11,13 +11,22 @@ in this repo I write some notes when I read article.
     - [Sensors:](#sensors)
     - [Common formats for 3D data](#common-formats-for-3d-data)
     - [3D point cloud challenges](#3d-point-cloud-challenges)
+    - [Various problems related to point cloud processing](#various-problems-related-to-point-cloud-processing)
+      - [3D shape classification](#3d-shape-classification)
+      - [3D object detection and tracking](#3d-object-detection-and-tracking)
+      - [3D point cloud segmentation](#3d-point-cloud-segmentation)
+      - [3D point cloud registration](#3d-point-cloud-registration)
+      - [6-DOF pose estimation](#6-dof-pose-estimation)
+      - [3D reconstruction](#3d-reconstruction)
     - [3D Point Cloud datasets](#3d-point-cloud-datasets)
     - [3D Point Cloud Tasks:](#3d-point-cloud-tasks)
-  - [Background](#background)
+  - [2- Background](#2--background)
     - [Datasets Type](#datasets-type)
     - [Datasets](#datasets)
     - [Metrics](#metrics)
-  - [3D Shape Classification](#3d-shape-classification)
+      - [Accuracy, F1, Precision, True/False Positive and True/False Negative](#accuracy-f1-precision-truefalse-positive-and-truefalse-negative)
+      - [Metric in Article](#metric-in-article)
+  - [3- 3D Shape Classification](#3--3d-shape-classification)
       - [3D Shape Classification methods](#3d-shape-classification-methods)
     - [Multi-View Based Methods](#multi-view-based-methods)
       - [MVCNN \[40\]:](#mvcnn-40)
@@ -27,6 +36,7 @@ in this repo I write some notes when I read article.
     - [Volumetric-based Methods](#volumetric-based-methods)
       - [Maturana et al. \[48\] (VoxNet):](#maturana-et-al-48-voxnet)
       - [Wu et al. \[6\]:](#wu-et-al-6)
+      - [**Octree**](#octree)
       - [OctNet \[49\]:](#octnet-49)
       - [Wang et al. \[50\]:](#wang-et-al-50)
       - [Le et al. \[51\]:](#le-et-al-51)
@@ -70,7 +80,38 @@ in this repo I write some notes when I read article.
 - small scale of datasets
 - high dimensionality
 - unstructured nature of 3D point cloud
+### Various problems related to point cloud processing
 
+#### 3D shape classification
+![3D point cloud challenges - PointNet Article](assets/3d_tasks_1.png)
+  - 3D object classification classifies the input category.
+
+
+#### 3D object detection and tracking
+![3D object detection and tracking](assets/3d_tasks_2.png)  
+  - 3D object detection classifies the object category and estimates oriented 2D bounding boxes of physical objects from 3D sensor data.
+
+
+
+#### 3D point cloud segmentation
+![3D point cloud segmentation](assets/3d_tasks_3.png)
+  - 3D point cloud segmentation is the process of classifying point clouds into multiple homogeneous regions, the points in the same region will have the same properties. The segmentation is challenging because of high redundancy, uneven sampling density, and lack explicit structure of point cloud data. This problem has many applications in robotics such as intelligent vehicles, autonomous mapping and navigation.
+
+
+
+#### 3D point cloud registration
+![3D point cloud registration](assets/3d_tasks_4.jpg)
+  - Point Cloud Registration is a fundamental problem in 3D computer vision and photogrammetry. Given several sets of points in different coordinate systems, the aim of registration is to find the transformation that best aligns all of them into a common coordinate system. Point Cloud Registration plays a significant role in many vision applications such as 3D model reconstruction, cultural heritage management, landslide monitoring and solar energy analysis.
+
+
+#### 6-DOF pose estimation
+![6-DOF pose estimation](assets/3d_tasks_5.png)
+  - 6D pose estimation is the task of detecting the 6D pose of an object, which include its location and orientation.This is an important task in robotics, where a robotic arm needs to know the location and orientation to detect and move objects in its vicinity successfully.
+
+
+#### 3D reconstruction
+![3D reconstruction](assets/3d_tasks_6.jpeg)
+  - In computer vision and computer graphics, 3D reconstruction is the process of capturing the shape and appearance of real objects. 
 ### 3D Point Cloud datasets
  - [6] MobileNet
  - [7] ScanObjectNN
@@ -88,8 +129,8 @@ in this repo I write some notes when I read article.
 - 3D Point Cloud Segmentation
 
 
-## Background
-
+## 2- Background
+It's talk about background of felid.
 ### Datasets Type
  - Synthetic Dataset: 
     - objects are complete
@@ -108,9 +149,15 @@ in this repo I write some notes when I read article.
  - [13] ApolloCar3D
  - [14],[15] **KITTI Vision Benchmark Suite **
 ### Metrics
+
+#### Accuracy, F1, Precision, True/False Positive and True/False Negative
+
+![True/False Positive and True/False Negative](assets/True_False_table.jpeg)
+![Accuracy, F1, Precision](assets/Precisionrecall.svg.png)
+#### Metric in Article
  - **Classification**
     - `Overall Accuracy` (OA): mean of all classes
-    - `Mean Class Accuracy` (mAcc): mean accuracy for all shape classes
+    - `Mean Class Accuracy` (mAcc): mean acc uracy for all shape classes
 - **Object Tracking**
     - `Average Precision` (AP)
     - `Precision` and `Success` use in overall performance of a 3D single object tracker
@@ -119,7 +166,7 @@ in this repo I write some notes when I read article.
     - `mean Intersection over Union` (mIou) and `mean class Accuracy` (mAcc) for evaluate performance
     - `mean Average Precision` (mAP) in instance segmentation
 
-## 3D Shape Classification
+## 3- 3D Shape Classification
 Methods for this task usually learn the embedding of each point first and then extract a global shape embedding from the whole point cloud using an aggregation method. Classification is finally achieved by feeding the global embedding into several fully connected layers. 
 
 #### 3D Shape Classification methods
@@ -154,6 +201,15 @@ These methods usually ‍‍`voxelize‍` a point cloud into 3D grids, and then 
 introduced a volumetric occupancy network called VoxNet to achieve robust 3D object recognition
 #### Wu et al. [6]:
 proposed a convolutional deep belief based 3D ShapeNets to learn the distribution of points from various 3D shapes 
+
+#### **Octree**
+An octree is a tree data structure in which each internal node has exactly eight children. Octrees are most often used to partition a three-dimensional space by recursively subdividing it into eight octants. Octrees are the three-dimensional analog of quadtrees.
+
+<iframe width="full" height="auto" src="https://www.youtube.com/embed/xFcQaig5Z2A" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+[Quadtrees and Octrees for Representing Spatial Information on Youtbue
+](https://youtu.be/xFcQaig5Z2A)
+
 ####  OctNet [49]:
 using a hybrid grid-octree structure, which represents the scene with several shallow octrees along a regular grid. The structure of octree is encoded efficiently using a bit string representation, and the feature vector of each voxel is indexed by simple arithmetic
 
